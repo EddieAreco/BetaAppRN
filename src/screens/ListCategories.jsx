@@ -5,7 +5,11 @@ import products from '../data/products.json'
 import ProductItem from '../components/ProductItem'
 import Search from '../components/Search'
 
-const ListCategories = ( { categorySelected = "" , setCategorySelected = () => {}}) => {
+const ListCategories = ({
+    categorySelected = "",
+    setCategorySelected = () => { },
+    setItemIdSelected = () => { }
+}) => {
 
     const [keyword, setKeyword] = useState('')
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -44,7 +48,10 @@ const ListCategories = ( { categorySelected = "" , setCategorySelected = () => {
                 data={productsFiltered}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                    <ProductItem product={item} />
+                    <ProductItem
+                        setItemIdSelected={setItemIdSelected}
+                        product={item}
+                    />
                 }
             />
 

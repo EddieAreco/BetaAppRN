@@ -4,9 +4,15 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 
 import Home from './src/screens/Home';
 import ListCategories from './src/screens/ListCategories';
+import ItemDetail from './src/screens/ItemDetail';
+
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 export default function App() {
+
+  const [categorySelected, setCategorySelected] = useState("")
+
+  const [itemIdSelected, setItemIdSelected] = useState("")
 
   const [fontsLoaded, fontError] = useFonts(
     {
@@ -29,15 +35,27 @@ export default function App() {
     return null
   }
 
-  const [categorySelected, setCategorySelected] = useState("")
-
   return (
     <View style={styles.container}>
 
       {
         categorySelected ? 
-        <ListCategories categorySelected={categorySelected} setCategorySelected={setCategorySelected} /> 
+
+        !itemIdSelected ?
+        <ListCategories 
+        categorySelected={categorySelected} setCategorySelected={setCategorySelected}
+        setItemIdSelected={setItemIdSelected} 
+        />  
+
         :
+
+        <ItemDetail 
+        idSelected = {itemIdSelected}
+        setProductSelected = {setItemIdSelected}
+        />
+
+        :
+
         <Home setCategorySelected={setCategorySelected} />
       }
 
