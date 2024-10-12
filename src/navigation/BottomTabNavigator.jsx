@@ -1,0 +1,85 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+import Header from '../components/Header'
+
+import Entypo from '@expo/vector-icons/Entypo';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+
+import HomeStackNavigator from './HomeStackNavigator';
+import CartTab from './CartTab';
+import OrdersTab from './OrdersTab';
+
+const Tab = createBottomTabNavigator()
+
+const BottomTabNavigator = () => {
+    return (
+
+        <Tab.Navigator
+
+            screenOptions={({ route }) => ({
+                header: () => {
+                    return <Header title={route.name} />
+                },
+                tabBarShowLabel: false,
+                tabBarStyle: styles.tabBar,
+
+            })}
+        >
+
+            <Tab.Screen
+                name="Shop"
+                component={HomeStackNavigator}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View>
+                                <Entypo name="shop" size={24} color={focused ? "red" : "green"} />
+                            </View>
+                        )
+                    },
+                }}
+            />
+
+            <Tab.Screen
+                name="Carrito"
+                component={CartTab}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View>
+                                <AntDesign name="shoppingcart" size={36} color={focused ? "red" : "green"} />
+                            </View>
+                        )
+                    },
+                }}
+            />
+
+            <Tab.Screen
+                name="Pedidos"
+                component={OrdersTab}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View>
+                                <FontAwesome6 name="clipboard-list" size={24} color={focused ? "red" : "green"} />
+                            </View>
+                        )
+                    },
+                }}
+            />
+
+        </Tab.Navigator>
+    )
+}
+
+export default BottomTabNavigator
+
+const styles = StyleSheet.create({
+    tabBar: {
+        backgroundColor: 'black',
+        shadowColor: 'black',
+    },
+})

@@ -8,6 +8,9 @@ import ItemDetail from './src/screens/ItemDetail';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import Navigator from './src/navigation/Navigator';
+import { Provider } from 'react-redux';
+import store from './src/store';
 export default function App() {
 
   const [categorySelected, setCategorySelected] = useState("")
@@ -25,39 +28,22 @@ export default function App() {
     }
   )
 
-  const onLaoutRootView = useCallback( async () => {
+  const onLaoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
 
-  if ( !fontsLoaded && !fontError) {
+  if (!fontsLoaded && !fontError) {
     return null
   }
 
   return (
     <View style={styles.container}>
 
-      {
-        categorySelected ? 
-
-        !itemIdSelected ?
-        <ListCategories 
-        categorySelected={categorySelected} setCategorySelected={setCategorySelected}
-        setItemIdSelected={setItemIdSelected} 
-        />  
-
-        :
-
-        <ItemDetail 
-        idSelected = {itemIdSelected}
-        setProductSelected = {setItemIdSelected}
-        />
-
-        :
-
-        <Home setCategorySelected={setCategorySelected} />
-      }
+      <Provider store={store}>
+        <Navigator />
+      </Provider>
 
     </View>
   );

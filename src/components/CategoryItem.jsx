@@ -1,17 +1,26 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Card from './Card'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCategorySelected } from '../features/shopSlice'
 
 const CategoryItem = ({
   categories,
-  selectCategory = () => { }
+  navigation,
 }) => {
+
+  const dispatch = useDispatch()
+
+  const handleNavigate = () => {
+    dispatch(setCategorySelected(categories))
+    navigation.navigate('ListCategories', {categories})
+  }
 
   return (
     <Card>
 
       <TouchableOpacity
-        onPress={() => selectCategory(categories)}
+        onPress={handleNavigate}
       >
 
         <Text style={styles.text}>{categories}</Text>

@@ -6,14 +6,16 @@ import ProductItem from '../components/ProductItem'
 import Search from '../components/Search'
 
 const ListCategories = ({
-    categorySelected = "",
     setCategorySelected = () => { },
-    setItemIdSelected = () => { }
+    navigation,
+    route,
 }) => {
 
     const [keyword, setKeyword] = useState('')
     const [productsFiltered, setProductsFiltered] = useState([])
     const [error, setError] = useState('')
+
+    const {categories: categorySelected} = route.params
 
     useEffect(() => {
 
@@ -40,7 +42,7 @@ const ListCategories = ({
 
             <Search
                 searchProduct={setKeyword}
-                goBack={() => setCategorySelected("")}
+                goBack={() => navigation.goBack()}
                 error={error}
             />
 
@@ -49,7 +51,7 @@ const ListCategories = ({
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
                     <ProductItem
-                        setItemIdSelected={setItemIdSelected}
+                        navigation={navigation}
                         product={item}
                     />
                 }

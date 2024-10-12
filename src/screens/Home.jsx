@@ -9,8 +9,9 @@ import CategoryItem from '../components/CategoryItem'
 
 import categories from '../data/categories.json'
 import Header from '../components/Header';
+import Counter from '../components/Counter';
 
-const Home = ({ setCategorySelected = () => {} }) => {
+const Home = ({ setCategorySelected = () => { }, navigation }) => {
 
     const [textItem, setTextItem] = useState("")
     const [itemList, setItemList] = useState([])
@@ -68,9 +69,13 @@ const Home = ({ setCategorySelected = () => {} }) => {
     return (
         <View>
 
-            <Header title="Home" />
+            <Header />
 
-            <TextInputCustomize
+            <Counter />
+
+            {/* ESTA PARTE COMENTADA ES UN LIST TO DO */}
+
+            {/* <TextInputCustomize
                 handleInput={handleInput}
                 textItem={textItem}
                 handleListItem={handleListItem}
@@ -103,7 +108,7 @@ const Home = ({ setCategorySelected = () => {} }) => {
                         </TouchableOpacity>
                     </View>
                 }
-            />
+            /> */}
 
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -112,7 +117,7 @@ const Home = ({ setCategorySelected = () => {} }) => {
                 keyExtractor={item => item}
                 renderItem={({ item }) =>
                     <CategoryItem
-                        selectCategory={() => setCategorySelected(item)}
+                        navigation={navigation}
                         categories={item}
                     />
                 }
@@ -140,7 +145,8 @@ const styles = StyleSheet.create({
     },
     flatList: {
         marginVertical: 10,
-        height: 100,
+        marginHorizontal: 10,
+        height: '90%',
     },
     textFlatList: {
         padding: 4,

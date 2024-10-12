@@ -36,7 +36,8 @@ export default TextInputCustomize
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
     marginVertical: 20
   },
   textInput: {
