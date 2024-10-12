@@ -13,20 +13,7 @@ const HomeStackNavigator = () => {
     return (
         <View style={styles.container}>
 
-                <Stack.Navigator
-                    screenOptions={
-                        ({ route }) => (
-                            {
-                                header: () => {
-                                    return <Header title={
-                                        route.name === 'Home' ? 'Coder Project' : 
-                                        route.name === 'ListCategories' ? route.params.categories : 'Item Detail' 
-                                    } />
-                                }
-                            }
-                        )
-                    }
-                >
+                <Stack.Navigator>
 
                     <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
 

@@ -10,8 +10,9 @@ import CategoryItem from '../components/CategoryItem'
 import categories from '../data/categories.json'
 import Header from '../components/Header';
 import Counter from '../components/Counter';
+import ShopLayout from '../components/ShopLayout';
 
-const Home = ({ setCategorySelected = () => { }, navigation }) => {
+const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
 
     const [textItem, setTextItem] = useState("")
     const [itemList, setItemList] = useState([])
@@ -67,9 +68,7 @@ const Home = ({ setCategorySelected = () => { }, navigation }) => {
     }
 
     return (
-        <View>
-
-            <Header />
+        <ShopLayout>
 
             <Counter />
 
@@ -129,13 +128,18 @@ const Home = ({ setCategorySelected = () => { }, navigation }) => {
                 cancelModal={cancelModal}
                 itemSelected={itemSelected}
             />
-        </View>
+        </ShopLayout>
     )
 }
 
 export default Home
 
 const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        flex: 1,
+        backgroundColor: 'blue',
+    },
     containerFlatList: {
         flexDirection: 'row',
         justifyContent: 'space-between',

@@ -19,14 +19,20 @@ const BottomTabNavigator = () => {
 
         <Tab.Navigator
 
-            screenOptions={({ route }) => ({
-                header: () => {
-                    return <Header title={route.name} />
-                },
-                tabBarShowLabel: false,
-                tabBarStyle: styles.tabBar,
+            screenOptions={
+                ({ route }) => (
+                    {
+                        header: () => { 
+                            return <Header route={
+                                route.name === 'Home' ? 'Coder Project' :
+                                    route.name === 'ListCategories' ? route.params.categories :
+                                    route.name === 'ItemDetail' ? route.params.productTitle : null
+                            } />
+                        },
+                        tabBarShowLabel: false,
+                        tabBarStyle: styles.tabBar,
 
-            })}
+                    })}
         >
 
             <Tab.Screen

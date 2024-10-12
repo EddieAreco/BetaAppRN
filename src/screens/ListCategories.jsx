@@ -16,6 +16,7 @@ const ListCategories = ({
     const [error, setError] = useState('')
 
     const {categories: categorySelected} = route.params
+    console.log('route en ListCategories', route)
 
     useEffect(() => {
 

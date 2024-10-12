@@ -1,11 +1,12 @@
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import React, {useState} from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SwitchCustom from './SwitchCustom';
+import { setDarkMode } from '../features/Global/globalSlice';
 
+const Header = ( { route } ) => {
 
-
-const Header = ({ route }) => {
+  const dispatch = useDispatch()
 
   const [isEnabled, setIsEnabled] = useState(false);
 
@@ -15,12 +16,22 @@ const Header = ({ route }) => {
 
   const {height, width} = useWindowDimensions()
 
+  const handleTheme = () => {
+    setIsEnabled(initialValue => !initialValue)
+    dispatch(setDarkMode(!isEnabled))
+  }
+
+  console.log('route en Header', route)
+
   return (
     <View style={styles.container}>
 
-      <SwitchCustom isEnabled={isEnabled} setIsEnabled={setIsEnabled}/>
+      <SwitchCustom 
+      isEnabled={isEnabled} 
+      setIsEnabled={handleTheme}
+      />
 
-      <Text style={width > 500 ? styles.header : styles.header2 }>{categorySelected  }</Text>
+      <Text style={width > 500 ? styles.header : styles.header2 }>{route}</Text>
     </View>
   )
 }
@@ -30,6 +41,7 @@ export default Header
 const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
+      justifyContent: 'center',
     },
     header: {
         fontSize: 30,

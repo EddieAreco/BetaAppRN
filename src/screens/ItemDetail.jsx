@@ -6,17 +6,21 @@ import products from '../data/products.json'
 const ItemDetail = ({ setProductSelected, route, navigation }) => {
 
     const [product, setProduct] = useState(null)
+    const [productTitle, setProductTitle] = useState(null)
 
-    console.log(route)
-
-    const {productId: idSelected} = route.params
+    const {productId: idSelected, productTitle: titleSelected} = route.params
+    
+    console.log('route en ItemDetail', route)
 
     useEffect(() => {
 
         const findProduct = products.find(product => product.id == idSelected)
+        const findProductForTitle = products.find(product => product.title == titleSelected)
+        // VER ESTA LINEA DE CODIGO DE ARRIBA YA QUE NO ESTA TOMANDO EL NOMBRE
 
         setProduct(findProduct)
-    }, [idSelected])
+        setProductTitle(findProductForTitle)
+    }, [idSelected, titleSelected])
 
     return (
         <View>
