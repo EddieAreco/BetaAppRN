@@ -1,0 +1,1 @@
+export const baseUrl = "https://betaapprn-default-rtdb.firebaseio.com/"

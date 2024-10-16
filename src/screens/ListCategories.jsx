@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
-import products from '../data/products.json'
 import ProductItem from '../components/ProductItem'
 import Search from '../components/Search'
+import { useGetProductsByCategoryQuery } from '../services/shopService'
 
 const ListCategories = ({
     setCategorySelected = () => { },
@@ -13,10 +13,12 @@ const ListCategories = ({
 
     const [keyword, setKeyword] = useState('')
     const [productsFiltered, setProductsFiltered] = useState([])
-    const [error, setError] = useState('')
+    const [errorSearch, setErrorSearch] = useState('')
 
     const {categories: categorySelected} = route.params
     console.log('route en ListCategories', route)
+    
+    const { data: products, isLoading, error } = useGetProductsByCategoryQuery(categorySelected)
 
     useEffect(() => {
 
@@ -24,19 +26,21 @@ const ListCategories = ({
         const digit = (regex.test(keyword))
 
         if (digit) {
-            setError('No se permiten digitos')
+            setErrorSearch('No se permiten digitos')
             return
         }
 
-        const preFilter = categorySelected ? products.filter(product => product.category === categorySelected) : products
+        if (!isLoading){
 
-        const productsFilter = preFilter.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
+            const productsFilter = products.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
 
-        setProductsFiltered(productsFilter.sort((a, b) => a.title.localeCompare(b.title)))
+            setProductsFiltered(productsFilter.sort((a, b) => a.title.localeCompare(b.title)))
+    
+            setErrorSearch('')
+            
+        }
 
-        setError('')
-
-    }, [keyword, categorySelected])
+    }, [keyword, categorySelected, products, isLoading])
 
     return (
         <View>
@@ -44,7 +48,7 @@ const ListCategories = ({
             <Search
                 searchProduct={setKeyword}
                 goBack={() => navigation.goBack()}
-                error={error}
+                error={errorSearch}
             />
 
             <FlatList

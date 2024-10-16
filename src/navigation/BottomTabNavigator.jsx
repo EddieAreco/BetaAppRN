@@ -22,11 +22,11 @@ const BottomTabNavigator = () => {
             screenOptions={
                 ({ route }) => (
                     {
-                        header: () => { 
+                        header: () => {
                             return <Header route={
                                 route.name === 'Home' ? 'Coder Project' :
                                     route.name === 'ListCategories' ? route.params.categories :
-                                    route.name === 'ItemDetail' ? route.params.productTitle : null
+                                        route.name === 'ItemDetail' ? route.params.productTitle : 'Coder Project'
                             } />
                         },
                         tabBarShowLabel: false,

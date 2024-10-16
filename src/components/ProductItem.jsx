@@ -3,7 +3,7 @@ import React from 'react'
 
 import Card from './Card'
 import { useDispatch } from 'react-redux'
-import { setProductSelected } from '../features/shopSlice'
+import { setProductSelected } from '../features/Shop/shopSlice'
 
 const ProductItem = ({ 
   product, 
@@ -15,7 +15,7 @@ const ProductItem = ({
   const handleNavigate = () => {
 
     dispatch(setProductSelected(product.title))
-    navigation.navigate('ItemDetail', {productId: product.id})
+    navigation.navigate('ItemDetail', {productId: product.id, productTitle: product.title})
   }
 
   return (

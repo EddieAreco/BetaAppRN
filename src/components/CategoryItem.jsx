@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Card from './Card'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategorySelected } from '../features/shopSlice'
+import { setCategorySelected } from '../features/Shop/shopSlice'
 
 const CategoryItem = ({
   categories,

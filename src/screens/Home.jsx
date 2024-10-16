@@ -7,10 +7,10 @@ import TextInputCustomize from '../components/textInputCustomize'
 import ModalCustomize from '../components/ModalCustomize'
 import CategoryItem from '../components/CategoryItem'
 
-import categories from '../data/categories.json'
 import Header from '../components/Header';
 import Counter from '../components/Counter';
 import ShopLayout from '../components/ShopLayout';
+import { useGetCategoriesQuery } from '../services/shopService';
 
 const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
 
@@ -67,6 +67,10 @@ const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
         )
     }
 
+    const { data: categories , error, isLoading } = useGetCategoriesQuery()
+
+    console.log('route en Home', route)
+
     return (
         <ShopLayout>
 
@@ -112,7 +116,7 @@ const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
             <FlatList
                 showsVerticalScrollIndicator={false}
                 style={styles.flatList}
-                data={categories.sort()}
+                data={categories}
                 keyExtractor={item => item}
                 renderItem={({ item }) =>
                     <CategoryItem

@@ -1,26 +1,24 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
-import products from '../data/products.json'
+import { useGetProductsByIdQuery } from '../services/shopService'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../features/Cart/cartSlice'
 
 const ItemDetail = ({ setProductSelected, route, navigation }) => {
 
-    const [product, setProduct] = useState(null)
-    const [productTitle, setProductTitle] = useState(null)
+    const dispatch = useDispatch()
 
-    const {productId: idSelected, productTitle: titleSelected} = route.params
-    
+    const { productId: idSelected, productTitle: titleSelected } = route.params
+    //ESTOS PARAMETROS, SON DEFINIDOS EN NAVIGATION.NAVIGATE EN ProductItem.jsx
+
+    const { data: product, isLoading, error } = useGetProductsByIdQuery(idSelected)
+
+    const handAddCart = () => {
+        dispatch(addItem({ ...product, quantity: 1 }))
+    }
+
     console.log('route en ItemDetail', route)
-
-    useEffect(() => {
-
-        const findProduct = products.find(product => product.id == idSelected)
-        const findProductForTitle = products.find(product => product.title == titleSelected)
-        // VER ESTA LINEA DE CODIGO DE ARRIBA YA QUE NO ESTA TOMANDO EL NOMBRE
-
-        setProduct(findProduct)
-        setProductTitle(findProductForTitle)
-    }, [idSelected, titleSelected])
 
     return (
         <View>
@@ -33,7 +31,7 @@ const ItemDetail = ({ setProductSelected, route, navigation }) => {
                     <Text>{product.title}</Text>
                     <Text>{product.price}</Text>
                     <Text>{product.description}</Text>
-                    <Button title="Agregar a Carrito" onPress={() => setProductSelected("")} /> 
+                    <Button title="Agregar a Carrito" onPress={handAddCart} />
                 </View>
                 :
                 <Text>Cargando...</Text>
