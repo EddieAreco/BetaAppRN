@@ -1,12 +1,28 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import ProductItem from '../components/ProductItem'
 import { useSelector } from 'react-redux'
+import { usePostOrderMutation } from '../services/shopService'
 
 const CartScreen = () => {
 
   const { items, total } = useSelector(state => state.cart.value)
+
+  const {user} = useSelector(state => state.auth.value)
+
+  const [triggerPost, result] = usePostOrderMutation()
+
+  const confirmOrder = () => {
+    triggerPost({ 
+      total,
+      items,
+      user: user,
+      createdDate: new Date().toLocaleString(),
+    })
+  }
+
+  console.log('result', result)
 
   return (
     <View style={styles.container}>
@@ -22,6 +38,7 @@ const CartScreen = () => {
         style={styles.flatList}
       />
 
+      <Button onPress={confirmOrder} title='Confirmar pedido' />
       <Text style={{ fontSize: 20, color: 'white' }}>Total: {total}</Text>
     </View>
   )
