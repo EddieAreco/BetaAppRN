@@ -28,16 +28,17 @@ const SignUpScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (result.isSuccess) {
+            console.log("Sign-up successful", result.data);
 
             dispatch(
                 setUser({
                     email: result.data.email,
-                    idToken: result.data.idToken
+                    idToken: result.data.idToken,
+                    localId: result.data.localId
                 })
             )
-        } else {
-            null
-        }
+        } 
+        
     }, [result])
 
     const onSubmit = () => {
@@ -50,12 +51,12 @@ const SignUpScreen = ({ navigation }) => {
             
             const validation = authSchema.validateSync({ email, password, repeatPassword })
 
-
             triggerSignUp({
                 email: email,
                 password: password,
                 returnSecureToken: true
             })
+            console.log("Sign-up triggered", result);
 
         } catch (err) {
 

@@ -20,21 +20,33 @@ const LoginScreen = ({ navigation }) => {
     useEffect(() => {
         if (result.isSuccess) {
 
-            console.log('result en LoginScreen', result)
-
             dispatch(
                 setUser({
                     email: result.data.email,
-                    idToken: result.data.idToken
+                    idToken: result.data.idToken,
+                    localId: result.data.localId
                 })
             )
         }
     }, [result])
 
     const onSubmit = () => {
-        triggerSignIn({ 
-            email: email, 
-            password: password })
+        try {
+
+            // const validation = signupSchema.validateSync({ email, password })
+            triggerSignIn({
+                email,
+                password,
+                returnSecureToken: true
+            })
+
+        } catch (error) {
+
+            console.log('Catch error LOGIN')
+            console.log(error.path)
+            console.log(error.message)
+
+        }
     }
 
     const handleNavigate = () => {
@@ -59,16 +71,16 @@ const LoginScreen = ({ navigation }) => {
                 error="Password no valido"
             />
 
-            <SubmitButton 
-            title="Ingresar"
-            onPress={onSubmit}
+            <SubmitButton
+                title="Ingresar"
+                onPress={onSubmit}
             />
 
             <Text>No tengo una cuenta</Text>
 
-            <SubmitButton 
-            title="Registrarse" 
-            onPress={handleNavigate}
+            <SubmitButton
+                title="Registrarse"
+                onPress={handleNavigate}
             />
         </View>
     )

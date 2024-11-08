@@ -7,10 +7,12 @@ import Header from '../components/Header'
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeStackNavigator from './HomeStackNavigator';
 import CartTab from './CartTab';
 import OrdersTab from './OrdersTab';
+import MyProfileStackNavigator from './MyProfileStackNavigator';
 
 const Tab = createBottomTabNavigator()
 
@@ -71,6 +73,20 @@ const BottomTabNavigator = () => {
                         return (
                             <View>
                                 <FontAwesome6 name="clipboard-list" size={24} color={focused ? "red" : "green"} />
+                            </View>
+                        )
+                    },
+                }}
+            />
+
+            <Tab.Screen
+                name="Mi Perfil"
+                component={MyProfileStackNavigator}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View>
+                                <Ionicons name="person" size={24} color={focused ? "red" : "green"} />
                             </View>
                         )
                     },
