@@ -13,7 +13,27 @@ const HomeStackNavigator = () => {
     return (
         <View style={styles.container}>
 
-                <Stack.Navigator>
+                <Stack.Navigator
+                initialRouteName='Hom'
+                screenOptions={
+                    ({ route, navigation }) => (
+                        {
+                            header: () => {
+                                
+                                return <Header 
+                                goBack={() => navigation.goBack()}
+                                route={
+                                        route.name === 'Home' ? 'Home' :
+                                            route.name === 'ListCategories' ? route.params.categories : 
+                                                route.name === 'ItemDetail' ? route.params.productTitle :  'Coder Project'
+                                } />
+                            },
+                            
+                            tabBarShowLabel: false,
+                            tabBarStyle: styles.tabBar,
+    
+                        })}
+                >
 
                     <Stack.Screen name="Home" component={Home} />
 

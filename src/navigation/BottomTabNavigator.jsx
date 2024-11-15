@@ -25,14 +25,17 @@ const BottomTabNavigator = () => {
                 ({ route, navigation }) => (
                     {
                         header: () => {
+                            
                             return <Header 
                             goBack={() => navigation.goBack()}
                             route={
-                                route.name === 'Home' ? 'Coder Project' :
-                                    route.name === 'ListCategories' ? route.params.categories :
-                                        route.name === 'ItemDetail' ? route.params.productTitle : 'Coder Project'
+                                    route.name === 'Shop' ? 'Shop' :
+                                        route.name === 'Carrito' ? 'Carrito' : 
+                                            route.name === 'Pedidos' ? 'Pedidos' :
+                                                route.name === 'Mi Perfil' ? 'Mi Perfil' : 'Coder Project'
                             } />
                         },
+                        
                         tabBarShowLabel: false,
                         tabBarStyle: styles.tabBar,
 

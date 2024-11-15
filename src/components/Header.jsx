@@ -23,8 +23,6 @@ const Header = ({ route, goBack }) => {
     dispatch(setDarkMode(!isEnabled))
   }
 
-  console.log('route en Header', route)
-
   return (
     <View style={styles.container}>
 
@@ -58,16 +56,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
   },
   header: {
     fontSize: 30,
-    marginTop: 25,
     textAlign: 'center',
     fontFamily: 'Titilium'
   },
   header2: {
     fontSize: 30,
-    marginTop: 25,
     textAlign: 'center',
     fontFamily: 'Matemasie'
   },

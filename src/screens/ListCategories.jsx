@@ -16,7 +16,6 @@ const ListCategories = ({
     const [errorSearch, setErrorSearch] = useState('')
 
     const {categories: categorySelected} = route.params
-    console.log('route en ListCategories', route)
     
     const { data: products, isLoading, error } = useGetProductsByCategoryQuery(categorySelected)
 

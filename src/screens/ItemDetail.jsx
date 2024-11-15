@@ -18,8 +18,6 @@ const ItemDetail = ({ setProductSelected, route, navigation }) => {
         dispatch(addItem({ ...product, quantity: 1 }))
     }
 
-    console.log('route en ItemDetail', route)
-
     return (
         <View>
 
