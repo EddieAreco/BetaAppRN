@@ -1,10 +1,12 @@
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SwitchCustom from './SwitchCustom';
 import { setDarkMode } from '../features/Global/globalSlice';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-const Header = ({ route }) => {
+
+const Header = ({ route, goBack }) => {
 
   const dispatch = useDispatch()
 
@@ -21,7 +23,7 @@ const Header = ({ route }) => {
     dispatch(setDarkMode(!isEnabled))
   }
 
-  console.log('route en Header', route.name)
+  console.log('route en Header', route)
 
   return (
     <View style={styles.container}>
@@ -31,12 +33,20 @@ const Header = ({ route }) => {
         setIsEnabled={handleTheme}
       />
 
-      {categorySelected ?
+      <TouchableOpacity
+        onPress={goBack}
+      >
+        <AntDesign name="arrowleft" size={24} color="black" />
+      </TouchableOpacity>
+
+      <Text style={width > 500 ? styles.header : styles.header2}>{route}</Text>
+
+      {/* {categorySelected ?
         <Text style={width > 500 ? styles.header : styles.header2}>{categorySelected}</Text>
         :
         <Text style={width > 500 ? styles.header : styles.header2}>{idSelected}</Text>
 
-      }
+      } */}
 
     </View>
   )

@@ -15,11 +15,11 @@ const HomeStackNavigator = () => {
 
                 <Stack.Navigator>
 
-                    <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                    <Stack.Screen name="Home" component={Home} />
 
-                    <Stack.Screen name="ListCategories" component={ListCategories} options={{ headerShown: false }}/>
+                    <Stack.Screen name="ListCategories" component={ListCategories}/>
 
-                    <Stack.Screen name="ItemDetail" component={ItemDetail} options={{ headerShown: false }}/>
+                    <Stack.Screen name="ItemDetail" component={ItemDetail}/>
 
                 </Stack.Navigator>
         </View>

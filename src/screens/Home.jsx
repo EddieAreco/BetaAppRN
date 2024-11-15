@@ -19,6 +19,8 @@ const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
     const [itemSelected, setItemSelected] = useState({})
     const [modal, setModal] = useState(false)
 
+    const { data: categories , error, isLoading } = useGetCategoriesQuery()
+
     const handleInput = (e) => {
         setTextItem(e)
     }
@@ -67,7 +69,8 @@ const Home = ({ setCategorySelected = () => { }, navigation, route }) => {
         )
     }
 
-    const { data: categories , error, isLoading } = useGetCategoriesQuery()
+    console.log('categories en Home', categories)
+    console.log('error en Home', error)
 
     console.log('route en Home', route)
 

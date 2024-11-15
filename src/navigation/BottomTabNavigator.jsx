@@ -22,10 +22,12 @@ const BottomTabNavigator = () => {
         <Tab.Navigator
 
             screenOptions={
-                ({ route }) => (
+                ({ route, navigation }) => (
                     {
                         header: () => {
-                            return <Header route={
+                            return <Header 
+                            goBack={() => navigation.goBack()}
+                            route={
                                 route.name === 'Home' ? 'Coder Project' :
                                     route.name === 'ListCategories' ? route.params.categories :
                                         route.name === 'ItemDetail' ? route.params.productTitle : 'Coder Project'
