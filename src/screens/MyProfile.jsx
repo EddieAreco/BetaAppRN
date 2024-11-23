@@ -9,15 +9,19 @@ const MyProfile = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
-    const { data: imageFromBase } = useGetProfileImageQuery(localId)
-
     const { imageCamera, localId, user } = useSelector(state => state.auth.value)
+
+    const { data: imageFromBase } = useGetProfileImageQuery(localId)
 
     const lauchCamera = async () => {
         navigation.navigate('ImageSelector')
     }
 
     const defaultImageRoute = '../../assets/favicon.png'
+
+    const lauchLocation = () => {
+        navigation.navigate('LocationSelector')
+    }
 
     const handleClearUser = () => {
         dispatch(clearUser())
@@ -57,6 +61,11 @@ const MyProfile = ({ navigation }) => {
                 </View>
 
             )}
+
+            <Button
+                title="Mi dirección"
+                onPress={lauchLocation}
+            />
 
             <Button
                 title="Cerrar Sesión"
