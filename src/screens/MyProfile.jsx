@@ -62,10 +62,10 @@ const MyProfile = ({ navigation }) => {
 
             )}
 
-            <Button
+            {/* <Button
                 title="Mi dirección"
                 onPress={lauchLocation}
-            />
+            /> */}
 
             <Button
                 title="Cerrar Sesión"

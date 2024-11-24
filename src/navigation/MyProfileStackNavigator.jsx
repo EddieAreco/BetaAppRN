@@ -22,7 +22,7 @@ const MyProfileStackNavigator = () => {
 
       <Stack.Screen name="ImageSelector" component={ImageSelector} />
 
-      <Stack.Screen name="LocationSelector" component={LocationSelector} />
+      {/* <Stack.Screen name="LocationSelector" component={LocationSelector} /> */}
 
     </Stack.Navigator>
   )
